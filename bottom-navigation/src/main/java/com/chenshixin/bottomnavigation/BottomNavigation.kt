@@ -3,6 +3,8 @@ package com.chenshixin.bottomnavigation
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.bottom_navigation_bar.view.*
 import java.util.*
@@ -29,6 +31,11 @@ class BottomNavigation(context: Context, attrs: AttributeSet) : FrameLayout(cont
      * Active title color res id1
      */
     var titleColorActive: Int? = null
+
+    init {
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        LayoutInflater.from(context).inflate(R.layout.bottom_navigation_bar, this, true)
+    }
 
     fun initialise() {
         if (items.isEmpty()) {
