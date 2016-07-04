@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="default_title_inactive">#61000000</color>
+    <color name="default_title_active">#000000</color>
+
+</resources>
