@@ -2,6 +2,7 @@ package com.chenshixin.bottomnavigation
 
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout
+import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
 
@@ -13,19 +14,30 @@ class BottomNavigationBehavior(context: Context?, attrs: AttributeSet?) : Coordi
     constructor() : this(null, null)
 
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: BottomNavigationBar, dependency: View?): Boolean {
-        return dependency?.id == R.id.bottom_navigation_bar_content
+        return dependency?.id == R.id.bottom_navigation_bar_nested_scroll_view
     }
 
-    override fun onNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar, target: View?, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int) {
-        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
-        offset(child, dyConsumed)
+    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar?, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
+        return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
-    private fun offset(bar: BottomNavigationBar, dyConsumed: Int) {
-        if (dyConsumed > 0) {
-            bar.visibility = View.VISIBLE
-        } else {
-            bar.visibility = View.GONE
+    override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar?, target: View?, dx: Int, dy: Int, consumed: IntArray?) {
+        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed)
+        if (child == null) return
+        if (dy > child.height && child.visibility == View.VISIBLE) {
+            hideBar(child)
+        } else if (dy < (0 - child.height) && child.visibility == View.GONE) {
+            showBar(child)
         }
     }
+
+    private fun hideBar(bar: BottomNavigationBar) {
+        bar.visibility == View.GONE
+    }
+
+    private fun showBar(bar: BottomNavigationBar) {
+        bar.visibility == View.VISIBLE
+    }
+
+
 }
