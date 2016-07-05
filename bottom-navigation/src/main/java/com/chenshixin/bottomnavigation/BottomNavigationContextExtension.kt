@@ -7,7 +7,7 @@ import android.view.WindowManager
 /**
  * Created by chenshixin on 7/5/16.
  */
-fun BottomNavigation.getItemWidth(): Int {
+fun BottomNavigationBar.getItemWidth(): Int {
     val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val size = Point()
     wm.defaultDisplay.getSize(size)

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BottomNavigation</string>
+    <string name="testString">Bottom navigation bars make it easy to explore and switch between top-level views in a single tap.
+Tapping on a bottom navigation icon takes you directly to the associated view or refreshes the currently active view.
+Bottom navigation is primarily for use on mobile. To achieve a similar effect for desktop, use side navigation.Bottom navigation provides quick navigation between top-level views of an app. It is primarily designed for use on mobile.
+Larger displays, like desktop, may achieve a similar effect by using side navigation. For instance, the compact “rail” treatment displays navigational icons by default.Bottom navigation should be used for:
+Three to five top-level destinations of similar importance (alternative: a persistent navigation drawer accessible from anywhere in the app)
+Destinations requiring direct access from anywhere in the app (alternative: tabs for only one or two destinations)</string>
+
 </resources>
