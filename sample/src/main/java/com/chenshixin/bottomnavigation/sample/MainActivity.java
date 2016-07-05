@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigation bottomNavigationBar = (BottomNavigation) findViewById(R.id.bottomNavigationBar);
-        bottomNavigationBar.addItem(new BottomNavigationItem("Book", R.drawable.ic_account_balance_wallet_black_24dp, R.drawable.ic_add_shopping_cart_black_24dp));
-        bottomNavigationBar.addItem(new BottomNavigationItem("Fav", R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
-        bottomNavigationBar.addItem(new BottomNavigationItem("White", R.drawable.ic_alarm_black_24dp, R.drawable.ic_android_black_24dp));
-        bottomNavigationBar.addItem(new BottomNavigationItem("Link", R.drawable.ic_android_black_24dp, R.drawable.ic_account_balance_wallet_black_24dp));
-        bottomNavigationBar.addItem(new BottomNavigationItem("Fav", R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
+        bottomNavigationBar.addItem(new BottomNavigationItem("Book", 0, R.drawable.ic_account_balance_wallet_black_24dp, R.drawable.ic_add_shopping_cart_black_24dp));
+        bottomNavigationBar.addItem(new BottomNavigationItem("Fav", 1, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
+        bottomNavigationBar.addItem(new BottomNavigationItem("White", 2, R.drawable.ic_alarm_black_24dp, R.drawable.ic_android_black_24dp));
+        bottomNavigationBar.addItem(new BottomNavigationItem("Link", 3, R.drawable.ic_android_black_24dp, R.drawable.ic_account_balance_wallet_black_24dp));
+        bottomNavigationBar.addItem(new BottomNavigationItem("Fav", 4, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
         bottomNavigationBar.setTitleColorActive(Color.BLUE);
         bottomNavigationBar.setTitleColorInactive(Color.RED);
         bottomNavigationBar.setOnTabSelectedListener(new BottomNavigation.OnTabSelectedListener() {

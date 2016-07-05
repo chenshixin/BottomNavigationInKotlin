@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.bottom_navigation_item.view.*
@@ -43,10 +44,20 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColor
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
         params.width = itemWidth
         layoutParams = params
+        setBadgeNumber(item.number)
         bottom_navigation_bar_icon.setImageResource(item.iconResIdInactive)
         bottom_navigation_bar_title.text = item.title
         bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
         bottom_navigation_bar_title.setTextColor(titleColorInactive)
+    }
+
+    fun setBadgeNumber(number: Int) {
+        if (number > 0) {
+            bottom_navigation_bar_icon_badge.text = "$number"
+            bottom_navigation_bar_icon_badge.visibility = View.VISIBLE
+        } else {
+            bottom_navigation_bar_icon_badge.visibility = View.GONE
+        }
     }
 
     fun select() {

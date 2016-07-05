@@ -18,6 +18,10 @@
     <dimen name="tab_top_padding_active">6dp</dimen>
     <!--Top padding of inactive tab-->
     <dimen name="tab_top_padding_inactive">8dp</dimen>
+    <!--Tab icon plus badge width -->
+    <dimen name="bottom_navigation_bar_icon_frame_width">48dp</dimen>
+    <!--Tab icon plus badge height -->
+    <dimen name="bottom_navigation_bar_icon_frame_height">36dp</dimen>
 
     //Dimens for Item
     <!-- Width and height of icon in tab -->
@@ -26,6 +30,7 @@
     <dimen name="title_size_active">14sp</dimen>
     <!--Text size for inactive title-->
     <dimen name="title_size_inactive">12sp</dimen>
-
+    <!-- badge text size -->
+    <dimen name="badge_text_size">12sp</dimen>
 
 </resources>

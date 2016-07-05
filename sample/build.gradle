@@ -20,5 +20,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:design:24.0.0'
+    testCompile 'junit:junit:4.12'
     compile project(':bottom-navigation')
 }

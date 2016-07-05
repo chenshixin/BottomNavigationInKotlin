@@ -3,5 +3,7 @@
 
     <color name="default_title_inactive">#61000000</color>
     <color name="default_title_active">#000000</color>
+    <color name="red_tip">#FE3824</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
