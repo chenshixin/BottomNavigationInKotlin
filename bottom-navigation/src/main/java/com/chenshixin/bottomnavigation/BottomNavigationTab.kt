@@ -2,6 +2,7 @@ package com.chenshixin.bottomnavigation
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.bottom_navigation_item.view.*
  * Tab in Bottom Navigation Bar
  * Created by chenshixin on 7/4/16.
  */
-class BottomNavigationTab(item: BottomNavigationItem, titleColorInactive: Int, titleColorActive: Int, context: Context) :
+class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColorInactive: Int, titleColorActive: Int, context: Context) :
         FrameLayout(context) {
 
     /**
@@ -39,10 +40,12 @@ class BottomNavigationTab(item: BottomNavigationItem, titleColorInactive: Int, t
 
     init {
         LayoutInflater.from(context).inflate(R.layout.bottom_navigation_item, this, true)
-        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        params.width = itemWidth
+        layoutParams = params
         bottom_navigation_bar_icon.setImageResource(item.iconResIdInactive)
         bottom_navigation_bar_title.text = item.title
-        bottom_navigation_bar_title.textSize = titleTextSizeInactive
+        bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
         bottom_navigation_bar_title.setTextColor(titleColorInactive)
     }
 
@@ -75,7 +78,7 @@ class BottomNavigationTab(item: BottomNavigationItem, titleColorInactive: Int, t
     private fun startTextSizeAnimation(titleTextSizeStart: Float, titleTextSizeEnd: Float) {
         val animator = ValueAnimator.ofFloat(titleTextSizeStart.toFloat(), titleTextSizeEnd.toFloat())
         animator.addUpdateListener({ value ->
-            bottom_navigation_bar_title.textSize = value.animatedValue as Float
+            bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.animatedValue as Float)
         })
         animator.duration = selectAnimationDuration
         animator.start()

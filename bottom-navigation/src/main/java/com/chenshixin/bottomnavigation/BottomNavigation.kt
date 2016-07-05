@@ -2,6 +2,7 @@ package com.chenshixin.bottomnavigation
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -44,10 +45,14 @@ class BottomNavigation(context: Context, attrs: AttributeSet) : FrameLayout(cont
         //TODO parse xml here
         checkNotNull(titleColorActive)
         checkNotNull(titleColorInactive)
+        ViewCompat.setElevation(this, 24F)
         bottom_navigation_bar_item_container.removeAllViews()
-        bottom_navigation_bar_item_container.setBackgroundColor(backgroundColor ?: Color.WHITE)
+        if (backgroundColor != null) {
+            bottom_navigation_bar_item_container.setBackgroundColor(backgroundColor ?: Color.WHITE)
+        }
+        val tabWidth = getItemWidth()
         items.mapIndexed { index, item ->
-            val tab = BottomNavigationTab(item, titleColorInactive!!, titleColorActive!!, context)
+            val tab = BottomNavigationTab(item, tabWidth, titleColorInactive!!, titleColorActive!!, context)
             tab.position = index
             tab.setOnClickListener { view ->
                 val newPosition = (view as BottomNavigationTab).position
@@ -55,14 +60,11 @@ class BottomNavigation(context: Context, attrs: AttributeSet) : FrameLayout(cont
                     if (selectedPosition != newPosition) {
                         tabs[selectedPosition].unSelect()
                         tabs[newPosition].select()
-                        if (selectedPosition == newPosition) {
-                            onTabSelectedListener?.onTabReselected(newPosition)
-                        } else {
                             onTabSelectedListener?.onTabSelected(newPosition)
                             onTabSelectedListener?.onTabUnselected(selectedPosition)
-                        }
                         selectedPosition = newPosition
-
+                    } else {
+                        onTabSelectedListener?.onTabReselected(newPosition)
                     }
                 }
             }
