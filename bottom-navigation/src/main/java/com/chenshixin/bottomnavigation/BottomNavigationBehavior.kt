@@ -1,42 +1,48 @@
 package com.chenshixin.bottomnavigation
 
-import android.content.Context
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
-import android.util.AttributeSet
 import android.view.View
 
 /**
  * Created by chenshixin on 7/5/16.
  */
-class BottomNavigationBehavior(context: Context?, attrs: AttributeSet?) : CoordinatorLayout.Behavior<BottomNavigationBar>(context, attrs) {
+class BottomNavigationBehavior: CoordinatorLayout.Behavior<BottomNavigationBar>() {
 
-    constructor() : this(null, null)
+    companion object {
+        val SCROLL_DIRECTION_UP = 1
+        val SCROLL_DIRECTION_DOWN = -1
+        val SCROLL_NONE = 0
+    }
+
+    private var totalDyConsumed = -1
 
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: BottomNavigationBar, dependency: View?): Boolean {
         return dependency?.id == R.id.bottom_navigation_bar_nested_scroll_view
     }
 
-    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar?, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
+    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
         return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
-    override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar?, target: View?, dx: Int, dy: Int, consumed: IntArray?) {
-        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed)
-        if (child == null) return
-        if (dy > child.height && child.visibility == View.VISIBLE) {
-            hideBar(child)
-        } else if (dy < (0 - child.height) && child.visibility == View.GONE) {
-            showBar(child)
+    override fun onNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar, target: View?, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
+        if (dyConsumed > 0 && totalDyConsumed < 0) {
+            totalDyConsumed = 0
+            dealBar(child, SCROLL_DIRECTION_UP)
+        } else if (dyConsumed < 0 && totalDyConsumed > 0) {
+            totalDyConsumed = 0
+            dealBar(child, SCROLL_DIRECTION_DOWN)
         }
+        totalDyConsumed += dyConsumed
     }
 
-    private fun hideBar(bar: BottomNavigationBar) {
-        bar.visibility == View.GONE
-    }
-
-    private fun showBar(bar: BottomNavigationBar) {
-        bar.visibility == View.VISIBLE
+    private fun dealBar(bar: BottomNavigationBar, consumedScrollDirection: Int) {
+        if (consumedScrollDirection == SCROLL_DIRECTION_DOWN && bar.isHidden) {
+            bar.show()
+        } else if (consumedScrollDirection == SCROLL_DIRECTION_UP && !bar.isHidden) {
+            bar.hide()
+        }
     }
 
 

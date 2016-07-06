@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPropertyAnimatorCompat
+import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -34,6 +36,8 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
      * Active title color res id1
      */
     var titleColorActive: Int? = null
+
+    var isHidden = false
 
     init {
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -100,6 +104,23 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         fun onTabUnselected(position: Int)
 
         fun onTabReselected(position: Int)
+    }
+
+    fun show() {
+        isHidden = false
+        animateOffset(0)
+    }
+
+    fun hide() {
+        isHidden = true
+        animateOffset(this.height)
+    }
+
+    fun animateOffset(offset: Int) {
+        val animator = ViewCompat.animate(this)
+        animator.duration = 200
+        animator.interpolator = LinearOutSlowInInterpolator()
+        animator.translationY(offset.toFloat()).start()
     }
 
 }

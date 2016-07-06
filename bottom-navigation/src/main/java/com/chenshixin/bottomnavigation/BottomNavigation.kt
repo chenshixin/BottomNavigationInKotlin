@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.bottom_navigation_bar_with_content.view.*
+import kotlinx.android.synthetic.main.bottom_navigation.view.*
 
 /**
  * Created by chenshixin on 7/5/16.
@@ -66,7 +66,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
         }
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.bottom_navigation_bar_with_content, this, true)
+        LayoutInflater.from(context).inflate(R.layout.bottom_navigation, this, true)
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
