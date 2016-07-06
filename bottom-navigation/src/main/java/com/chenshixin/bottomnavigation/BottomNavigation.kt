@@ -18,28 +18,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
 
     var fragmentChangeManager: FragmentChangManager? = null
 
-    var onTabSelectedListener: BottomNavigationBar.OnTabSelectedListener?
-        set(value) {
-            bottomNavigationBar.onTabSelectedListener = object : BottomNavigationBar.OnTabSelectedListener {
-                override fun onTabWillBeSelected(position: Int): Boolean {
-                    return value?.onTabWillBeSelected(position) ?: true
-                }
-
-                override fun onTabSelected(position: Int) {
-                    this@BottomNavigation.currentTab = position
-                    value?.onTabSelected(position)
-                }
-
-                override fun onTabUnselected(position: Int) {
-                    value?.onTabUnselected(position)
-                }
-
-                override fun onTabReselected(position: Int) {
-                    value?.onTabReselected(position)
-                }
-            }
-        }
-        get() = bottomNavigationBar.onTabSelectedListener
+    var onTabSelectedListener: BottomNavigationBar.OnTabSelectedListener? = null
 
     /**
      * Inactive title color res id
@@ -82,6 +61,28 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
 
     fun initialise() {
         bottomNavigationBar.initialise()
+        bottomNavigationBar.onTabSelectedListener = object : BottomNavigationBar.OnTabSelectedListener {
+            override fun onTabWillBeSelected(position: Int): Boolean {
+                return onTabSelectedListener?.onTabWillBeSelected(position) ?: true
+            }
+
+            override fun onTabSelected(position: Int) {
+                this@BottomNavigation.currentTab = position
+                onTabSelectedListener?.onTabSelected(position)
+            }
+
+            override fun onTabUnselected(position: Int) {
+                onTabSelectedListener?.onTabUnselected(position)
+            }
+
+            override fun onTabReselected(position: Int) {
+                val fragment = fragmentChangeManager!!.fragments[position]
+                if (fragment is BottomNavigationBar.DoubleTapToScrollTop) {
+                    fragment.scrollToTop()
+                }
+                onTabSelectedListener?.onTabReselected(position)
+            }
+        }
     }
 
 

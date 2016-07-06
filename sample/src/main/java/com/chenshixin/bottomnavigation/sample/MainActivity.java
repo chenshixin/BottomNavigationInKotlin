@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tabItems.add(new BottomNavigationItem("Link", 3, R.drawable.ic_android_black_24dp, R.drawable.ic_account_balance_wallet_black_24dp));
         tabItems.add(new BottomNavigationItem("Fav", 4, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
 
-        List<Fragment> fragments = new ArrayList<>();
+        final List<Fragment> fragments = new ArrayList<>();
         fragments.add(SimpleTextFragment.newInstance("Book"));
         fragments.add(SimpleTextFragment.newInstance("Fav"));
         fragments.add(SimpleTextFragment.newInstance("White"));
@@ -50,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabSelected(int position) {
-//                Toast.makeText(MainActivity.this, position + " selected", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onTabUnselected(int position) {
-//                Toast.makeText(MainActivity.this, position + " onTabUnselected", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onTabReselected(int position) {
-                Toast.makeText(MainActivity.this, position + " 需要滚动到顶部", Toast.LENGTH_SHORT).show();
+
             }
         });
         bottomNavigation.initialise();

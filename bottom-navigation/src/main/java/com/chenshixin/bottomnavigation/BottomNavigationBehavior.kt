@@ -18,7 +18,7 @@ class BottomNavigationBehavior: CoordinatorLayout.Behavior<BottomNavigationBar>(
     private var totalDyConsumed = -1
 
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: BottomNavigationBar, dependency: View?): Boolean {
-        return dependency?.id == R.id.bottom_navigation_bar_nested_scroll_view
+        return dependency?.id == R.id.bottom_navigation_bar_content
     }
 
     override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
