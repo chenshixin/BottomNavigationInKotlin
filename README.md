@@ -8,6 +8,24 @@ Bottom navigation widget written using Kotlin language
 * Badge view supoorted
 * Double tap to scroll to top
 
+#Installing
+In your **root** `build.gradle`, add `maven { url "https://jitpack.io" }`
+```gradle
+allprojects {
+ repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+ }
+}
+```
+and in your own module:
+```gradle
+dependencies {
+    compile 'com.github.chenshixin:BottomNavigationInKotlin:0.1'
+}
+```
+
+
 #Screenshots
 ![](http://7xored.com1.z0.glb.clouddn.com/github_BottomNavigationInKotlin_screenshot.jpg?imageView2/2/w/300/q/75)
 
@@ -59,3 +77,5 @@ Bottom navigation widget written using Kotlin language
   bottomNavigation.initialise();
   bottomNavigation.setCurrentTab(0);
 ```
+
+
