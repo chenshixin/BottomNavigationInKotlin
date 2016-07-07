@@ -39,6 +39,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
     var currentTab: Int
         get() = bottom_navigation_bar.selectedPosition
         set(value) {
+            bottom_navigation_bar.setCurrentTab(value)
             fragmentChangeManager?.currentTab = value
         }
 

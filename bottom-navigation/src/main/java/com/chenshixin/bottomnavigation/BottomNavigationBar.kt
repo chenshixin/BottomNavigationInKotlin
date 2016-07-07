@@ -64,8 +64,8 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
                     if (selectedPosition != newPosition) {
                         tabs[selectedPosition].unSelect()
                         tabs[newPosition].select()
-                            onTabSelectedListener?.onTabSelected(newPosition)
-                            onTabSelectedListener?.onTabUnselected(selectedPosition)
+                        onTabSelectedListener?.onTabSelected(newPosition)
+                        onTabSelectedListener?.onTabUnselected(selectedPosition)
                         selectedPosition = newPosition
                     } else {
                         onTabSelectedListener?.onTabReselected(newPosition)
@@ -74,6 +74,16 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
             }
             tabs.add(tab)
             bottom_navigation_bar_item_container.addView(tab)
+        }
+    }
+
+    internal fun setCurrentTab(index: Int) {
+        tabs.mapIndexed { i, bottomNavigationTab ->
+            if (i == index) {
+                tabs[i].select()
+            } else {
+                tabs[i].unSelect()
+            }
         }
     }
 
