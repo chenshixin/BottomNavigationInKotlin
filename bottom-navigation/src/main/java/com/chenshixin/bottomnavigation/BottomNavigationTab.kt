@@ -42,17 +42,13 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         params.width = itemWidth
         layoutParams = params
         setBadgeNumber(item.number)
+        setTitle(item.title)
         bottom_navigation_bar_icon.setImageResource(item.iconResIdInactive)
-        if (item.title == null) {
-            bottom_navigation_bar_title.visibility = View.GONE
-        } else {
-            bottom_navigation_bar_title.text = item.title
-        }
         bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
         bottom_navigation_bar_title.setTextColor(titleColorInactive)
     }
 
-    fun setBadgeNumber(number: Int?) {
+    internal fun setBadgeNumber(number: Int?) {
         if (number != null && number > 0) {
             bottom_navigation_bar_icon_badge.text = "$number"
             bottom_navigation_bar_icon_badge.visibility = View.VISIBLE
@@ -61,7 +57,30 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         }
     }
 
-    fun select() {
+    internal fun setTitle(title: String?) {
+        if (title?.isEmpty() ?: true) {
+            bottom_navigation_bar_title.visibility = View.INVISIBLE
+        } else {
+            bottom_navigation_bar_title.visibility = View.VISIBLE
+            bottom_navigation_bar_title.text = title
+        }
+    }
+
+    internal fun setInActiveIcon(resId: Int) {
+        bottomNavigationItem.iconResIdInactive = resId
+        if (!isActive) {
+            bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
+        }
+    }
+
+    internal fun setActiveIcon(resId: Int) {
+        bottomNavigationItem.iconResIdActive = resId
+        if (isActive) {
+            bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
+        }
+    }
+
+    internal fun select() {
         isActive = true
         bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
         bottom_navigation_bar_title.setTextColor(titleColorActive)
@@ -69,7 +88,7 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         startTextSizeAnimation(titleTextSizeInactive, titleTextSizeActive)
     }
 
-    fun unSelect() {
+    internal fun unSelect() {
         isActive = false
         bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdInactive)
         bottom_navigation_bar_title.setTextColor(titleColorInactive)

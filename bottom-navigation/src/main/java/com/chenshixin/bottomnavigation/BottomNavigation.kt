@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.bottom_navigation.view.*
  */
 class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLayout(context, attrs) {
 
-    val bottomNavigationBar by lazy { bottom_navigation_bar }
-
     var fragmentChangeManager: FragmentChangManager? = null
 
     var onTabSelectedListener: BottomNavigationBar.OnTabSelectedListener? = null
@@ -25,21 +23,21 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
      */
     var titleColorInactive: Int?
         set(value) {
-            bottomNavigationBar.titleColorActive = value
+            bottom_navigation_bar.titleColorActive = value
         }
-        get() = bottomNavigationBar.titleColorActive
+        get() = bottom_navigation_bar.titleColorActive
 
     /**
      * Active title color res id
      */
     var titleColorActive: Int?
         set(value) {
-            bottomNavigationBar.titleColorInactive = value
+            bottom_navigation_bar.titleColorInactive = value
         }
-        get() = bottomNavigationBar.titleColorInactive
+        get() = bottom_navigation_bar.titleColorInactive
 
     var currentTab: Int
-        get() = bottomNavigationBar.selectedPosition
+        get() = bottom_navigation_bar.selectedPosition
         set(value) {
             fragmentChangeManager?.currentTab = value
         }
@@ -55,13 +53,13 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
 
     fun setTabItems(tabs: List<BottomNavigationItem>) {
         tabs.map { item ->
-            bottomNavigationBar.addItem(item)
+            bottom_navigation_bar.addItem(item)
         }
     }
 
     fun initialise() {
-        bottomNavigationBar.initialise()
-        bottomNavigationBar.onTabSelectedListener = object : BottomNavigationBar.OnTabSelectedListener {
+        bottom_navigation_bar.initialise()
+        bottom_navigation_bar.onTabSelectedListener = object : BottomNavigationBar.OnTabSelectedListener {
             override fun onTabWillBeSelected(position: Int): Boolean {
                 return onTabSelectedListener?.onTabWillBeSelected(position) ?: true
             }
@@ -85,5 +83,20 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
         }
     }
 
+    fun setItemBadge(index: Int, number: Int) {
+        bottom_navigation_bar.tabs[index].setBadgeNumber(number)
+    }
+
+    fun setItemTitle(index: Int, title: String) {
+        bottom_navigation_bar.tabs[index].setTitle(title)
+    }
+
+    fun setItemActiveIcon(index: Int, resId: Int) {
+        bottom_navigation_bar.tabs[index].setActiveIcon(resId)
+    }
+
+    fun setItemInActiveIcon(index: Int, resId: Int) {
+        bottom_navigation_bar.tabs[index].setInActiveIcon(resId)
+    }
 
 }

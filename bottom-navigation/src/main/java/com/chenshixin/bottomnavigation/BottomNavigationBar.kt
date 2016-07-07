@@ -110,21 +110,37 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         fun scrollToTop()
     }
 
-    fun show() {
+    internal fun show() {
         isHidden = false
         animateOffset(0)
     }
 
-    fun hide() {
+    internal fun hide() {
         isHidden = true
         animateOffset(this.height)
     }
 
-    fun animateOffset(offset: Int) {
+    internal fun animateOffset(offset: Int) {
         val animator = ViewCompat.animate(this)
         animator.duration = 200
         animator.interpolator = LinearOutSlowInInterpolator()
         animator.translationY(offset.toFloat()).start()
+    }
+
+    internal fun setItemBadge(index: Int, number: Int) {
+        tabs[index].setBadgeNumber(number)
+    }
+
+    internal fun setItemTitle(index: Int, title: String) {
+        tabs[index].setTitle(title)
+    }
+
+    internal fun setItemActiveIcon(index: Int, resId: Int) {
+        tabs[index].setActiveIcon(resId)
+    }
+
+    internal fun setItemInActiveIcon(index: Int, resId: Int) {
+        tabs[index].setInActiveIcon(resId)
     }
 
 }
