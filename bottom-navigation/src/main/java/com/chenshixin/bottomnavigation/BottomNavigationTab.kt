@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.bottom_navigation_item.view.*
  * Tab in Bottom Navigation Bar
  * Created by chenshixin on 7/4/16.
  */
-class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColorInactive: Int, titleColorActive: Int, context: Context) :
+class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleColorInactive: Int, val titleColorActive: Int, context: Context) :
         FrameLayout(context) {
 
     /**
@@ -26,6 +26,8 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColor
      */
     var isActive: Boolean = false
 
+    var selectAnimationDuration: Long = 200
+
     val bottomNavigationItem = item
 
     val topPaddingActive by lazy { resources.getDimension(R.dimen.tab_top_padding_active).toInt() }
@@ -34,11 +36,6 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColor
     val titleTextSizeActive by lazy { resources.getDimension(R.dimen.title_size_active) }
     val titleTextSizeInactive by lazy { resources.getDimension(R.dimen.title_size_inactive) }
 
-    val selectAnimationDuration: Long = 200
-
-    val titleColorInactive = titleColorInactive
-    val titleColorActive = titleColorActive
-
     init {
         LayoutInflater.from(context).inflate(R.layout.bottom_navigation_item, this, true)
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -46,13 +43,17 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, titleColor
         layoutParams = params
         setBadgeNumber(item.number)
         bottom_navigation_bar_icon.setImageResource(item.iconResIdInactive)
-        bottom_navigation_bar_title.text = item.title
+        if (item.title == null) {
+            bottom_navigation_bar_title.visibility = View.GONE
+        } else {
+            bottom_navigation_bar_title.text = item.title
+        }
         bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
         bottom_navigation_bar_title.setTextColor(titleColorInactive)
     }
 
-    fun setBadgeNumber(number: Int) {
-        if (number > 0) {
+    fun setBadgeNumber(number: Int?) {
+        if (number != null && number > 0) {
             bottom_navigation_bar_icon_badge.text = "$number"
             bottom_navigation_bar_icon_badge.visibility = View.VISIBLE
         } else {
