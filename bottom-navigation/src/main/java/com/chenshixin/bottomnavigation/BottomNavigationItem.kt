@@ -7,7 +7,7 @@ package com.chenshixin.bottomnavigation
  * @param iconResIdActive active icon resource id
  * Created by chenshixin on 7/4/16.
  */
-data class BottomNavigationItem(var title: String?,
-                                var number: Int?,
+data class BottomNavigationItem(var title: String? = null,
+                                var number: Int? = 0,
                                 var iconResIdInactive: Int,
                                 var iconResIdActive: Int)
