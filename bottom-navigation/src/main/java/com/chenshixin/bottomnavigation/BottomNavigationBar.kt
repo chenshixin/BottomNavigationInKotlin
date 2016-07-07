@@ -49,8 +49,6 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
             return
         }
         //TODO parse xml here
-        checkNotNull(titleColorActive)
-        checkNotNull(titleColorInactive)
         ViewCompat.setElevation(this, 24F)
         bottom_navigation_bar_item_container.removeAllViews()
         if (backgroundColor != null) {
@@ -58,7 +56,7 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         }
         val tabWidth = getItemWidth()
         items.mapIndexed { index, item ->
-            val tab = BottomNavigationTab(item, tabWidth, titleColorInactive!!, titleColorActive!!, context)
+            val tab = BottomNavigationTab(item, tabWidth, titleColorInactive, titleColorActive, context)
             tab.position = index
             tab.setOnClickListener { view ->
                 val newPosition = (view as BottomNavigationTab).position

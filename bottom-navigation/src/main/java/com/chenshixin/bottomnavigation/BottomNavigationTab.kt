@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.bottom_navigation_item.view.*
  * Tab in Bottom Navigation Bar
  * Created by chenshixin on 7/4/16.
  */
-class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleColorInactive: Int, val titleColorActive: Int, context: Context) :
+class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleColorInactive: Int?, val titleColorActive: Int?, context: Context) :
         FrameLayout(context) {
 
     /**
@@ -43,9 +43,9 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         layoutParams = params
         setBadgeNumber(item.number)
         setTitle(item.title)
-        bottom_navigation_bar_icon.setImageResource(item.iconResIdInactive)
+        setCurrentIcon(item.iconResIdInactive)
         bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
-        bottom_navigation_bar_title.setTextColor(titleColorInactive)
+        setCurrentTextColor(titleColorInactive)
     }
 
     internal fun setBadgeNumber(number: Int?) {
@@ -69,29 +69,29 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
     internal fun setInActiveIcon(resId: Int) {
         bottomNavigationItem.iconResIdInactive = resId
         if (!isActive) {
-            bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
+            setCurrentIcon(bottomNavigationItem.iconResIdActive)
         }
     }
 
     internal fun setActiveIcon(resId: Int) {
         bottomNavigationItem.iconResIdActive = resId
         if (isActive) {
-            bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
+            setCurrentIcon(bottomNavigationItem.iconResIdActive)
         }
     }
 
     internal fun select() {
         isActive = true
-        bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdActive)
-        bottom_navigation_bar_title.setTextColor(titleColorActive)
+        setCurrentIcon(bottomNavigationItem.iconResIdActive)
+        setCurrentTextColor(titleColorActive)
         startPaddingAnimation(topPaddingInactive, topPaddingActive)
         startTextSizeAnimation(titleTextSizeInactive, titleTextSizeActive)
     }
 
     internal fun unSelect() {
         isActive = false
-        bottom_navigation_bar_icon.setImageResource(bottomNavigationItem.iconResIdInactive)
-        bottom_navigation_bar_title.setTextColor(titleColorInactive)
+        setCurrentIcon(bottomNavigationItem.iconResIdInactive)
+        setCurrentTextColor(titleColorInactive)
         startPaddingAnimation(topPaddingActive, topPaddingInactive)
         startTextSizeAnimation(titleTextSizeActive, titleTextSizeInactive)
     }
@@ -113,6 +113,16 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         })
         animator.duration = selectAnimationDuration
         animator.start()
+    }
+
+    private fun setCurrentIcon(resId: Int) {
+        bottom_navigation_bar_icon.setImageResource(resId)
+    }
+
+    private fun setCurrentTextColor(color: Int?) {
+        if (color != null) {
+            bottom_navigation_bar_title.setTextColor(color)
+        }
     }
 
 }
