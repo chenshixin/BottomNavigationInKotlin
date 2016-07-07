@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/tab_top_padding_inactive">
 
     <FrameLayout
+        android:id="@+id/bottom_navigation_bar_icon_frame"
         android:layout_width="@dimen/bottom_navigation_bar_icon_frame_width"
         android:layout_height="@dimen/bottom_navigation_bar_icon_frame_height"
         android:layout_gravity="center_horizontal|top">

@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<BottomNavigationItem> tabItems = new ArrayList<>();
-        tabItems.add(new BottomNavigationItem("Book", 0, R.drawable.ic_account_balance_wallet_black_24dp, R.drawable.ic_add_shopping_cart_black_24dp));
+        tabItems.add(new BottomNavigationItem("", 0, R.drawable.ic_account_balance_wallet_black_24dp, R.drawable.ic_add_shopping_cart_black_24dp));
         tabItems.add(new BottomNavigationItem("Fav", 1, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
-        tabItems.add(new BottomNavigationItem("White", 2, R.drawable.ic_alarm_black_24dp, R.drawable.ic_android_black_24dp));
+        tabItems.add(new BottomNavigationItem("", 2, R.drawable.ic_alarm_black_24dp, R.drawable.ic_android_black_24dp));
         tabItems.add(new BottomNavigationItem("Link", 3, R.drawable.ic_android_black_24dp, R.drawable.ic_account_balance_wallet_black_24dp));
         tabItems.add(new BottomNavigationItem("Fav", 4, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
 

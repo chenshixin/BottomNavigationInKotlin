@@ -3,6 +3,7 @@ package com.chenshixin.bottomnavigation
 import android.animation.ValueAnimator
 import android.content.Context
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,12 +59,17 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
     }
 
     internal fun setTitle(title: String?) {
+        val param = bottom_navigation_bar_icon_frame.layoutParams as FrameLayout.LayoutParams
+
         if (title?.isEmpty() ?: true) {
             bottom_navigation_bar_title.visibility = View.INVISIBLE
+            param.gravity = Gravity.CENTER
         } else {
             bottom_navigation_bar_title.visibility = View.VISIBLE
             bottom_navigation_bar_title.text = title
+            param.gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
         }
+        bottom_navigation_bar_icon_frame.layoutParams = param
     }
 
     internal fun setInActiveIcon(resId: Int) {
