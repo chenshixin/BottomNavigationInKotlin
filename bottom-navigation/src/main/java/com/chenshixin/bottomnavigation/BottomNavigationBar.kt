@@ -85,6 +85,7 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
                 tabs[i].unSelect()
             }
         }
+        selectedPosition = index
     }
 
     /**

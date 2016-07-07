@@ -21,48 +21,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<BottomNavigationItem> tabItems = new ArrayList<>();
-        tabItems.add(new BottomNavigationItem("", 0, R.drawable.ic_account_balance_wallet_black_24dp, R.drawable.ic_add_shopping_cart_black_24dp));
-        tabItems.add(new BottomNavigationItem("Fav", 1, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
-        tabItems.add(new BottomNavigationItem("", 2, R.drawable.ic_alarm_black_24dp, R.drawable.ic_android_black_24dp));
-        tabItems.add(new BottomNavigationItem("Link", 3, R.drawable.ic_android_black_24dp, R.drawable.ic_account_balance_wallet_black_24dp));
-        tabItems.add(new BottomNavigationItem("Fav", 4, R.drawable.ic_add_shopping_cart_black_24dp, R.drawable.ic_alarm_black_24dp));
+//        tabItems.add(new BottomNavigationItem("", 0, R.drawable.ic_tab_explore_b, R.drawable.ic_tab_explore_a));
+//        tabItems.add(new BottomNavigationItem("", 2, R.drawable.ic_tab_news_b, R.drawable.ic_tab_news_a));
+//        tabItems.add(new BottomNavigationItem("", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
+        tabItems.add(new BottomNavigationItem("Explore", 0, R.drawable.ic_tab_explore_b, R.drawable.ic_tab_explore_a));
+        tabItems.add(new BottomNavigationItem("News", 2, R.drawable.ic_tab_news_b, R.drawable.ic_tab_news_a));
+        tabItems.add(new BottomNavigationItem("Mine", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
 
         final List<Fragment> fragments = new ArrayList<>();
-        fragments.add(SimpleTextFragment.newInstance("Book"));
-        fragments.add(SimpleTextFragment.newInstance("Fav"));
-        fragments.add(SimpleTextFragment.newInstance("White"));
-        fragments.add(SimpleTextFragment.newInstance("Link"));
-        fragments.add(SimpleTextFragment.newInstance("Fav"));
+        fragments.add(SimpleTextFragment.newInstance("Explore"));
+        fragments.add(SimpleTextFragment.newInstance("News"));
+        fragments.add(SimpleTextFragment.newInstance("Mine"));
 
         BottomNavigation bottomNavigation = (BottomNavigation) findViewById(R.id.bottom_navigation_bar_with_content);
         bottomNavigation.setTabItems(tabItems);
         bottomNavigation.setFragments(getSupportFragmentManager(), fragments);
-        bottomNavigation.setTitleColorActive(Color.BLUE);
-        bottomNavigation.setTitleColorInactive(Color.RED);
-        bottomNavigation.setOnTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-            @Override
-            public boolean onTabWillBeSelected(int position) {
-                if (position == 1) {
-                    Toast.makeText(MainActivity.this, "Need login first", Toast.LENGTH_SHORT).show();
-                }
-                return position != 1;
-            }
-
-            @Override
-            public void onTabSelected(int position) {
-
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-
-            }
-        });
+        bottomNavigation.setTitleColorActive(Color.BLACK);
+        bottomNavigation.setTitleColorInactive(Color.GRAY);
         bottomNavigation.initialise();
         bottomNavigation.setCurrentTab(0);
     }

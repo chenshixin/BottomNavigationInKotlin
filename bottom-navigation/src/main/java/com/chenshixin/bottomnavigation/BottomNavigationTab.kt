@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import kotlinx.android.synthetic.main.bottom_navigation_item.view.*
+import kotlinx.android.synthetic.main.bottom_navigation_tab.view.*
 
 /**
  * Tab in Bottom Navigation Bar
@@ -38,7 +38,7 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
     val titleTextSizeInactive by lazy { resources.getDimension(R.dimen.title_size_inactive) }
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.bottom_navigation_item, this, true)
+        LayoutInflater.from(context).inflate(R.layout.bottom_navigation_tab, this, true)
         val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
         params.width = itemWidth
         layoutParams = params
@@ -59,17 +59,20 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
     }
 
     internal fun setTitle(title: String?) {
-        val param = bottom_navigation_bar_icon_frame.layoutParams as FrameLayout.LayoutParams
-
+        val frameParams = bottom_navigation_bar_icon_frame.layoutParams as FrameLayout.LayoutParams
+        val iconParams = bottom_navigation_bar_icon.layoutParams as FrameLayout.LayoutParams
         if (title?.isEmpty() ?: true) {
-            bottom_navigation_bar_title.visibility = View.INVISIBLE
-            param.gravity = Gravity.CENTER
+            bottom_navigation_bar_title.visibility = View.GONE
+            frameParams.gravity = Gravity.CENTER
+            iconParams.gravity = Gravity.CENTER
         } else {
             bottom_navigation_bar_title.visibility = View.VISIBLE
             bottom_navigation_bar_title.text = title
-            param.gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
+            frameParams.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            iconParams.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
         }
-        bottom_navigation_bar_icon_frame.layoutParams = param
+        bottom_navigation_bar_icon_frame.layoutParams = frameParams
+        bottom_navigation_bar_icon.layoutParams = iconParams
     }
 
     internal fun setInActiveIcon(resId: Int) {
@@ -91,6 +94,7 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         setCurrentIcon(bottomNavigationItem.iconResIdActive)
         setCurrentTextColor(titleColorActive)
         startPaddingAnimation(topPaddingInactive, topPaddingActive)
+        if (bottomNavigationItem.title?.isEmpty() ?: true) return
         startTextSizeAnimation(titleTextSizeInactive, titleTextSizeActive)
     }
 
@@ -99,10 +103,14 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         setCurrentIcon(bottomNavigationItem.iconResIdInactive)
         setCurrentTextColor(titleColorInactive)
         startPaddingAnimation(topPaddingActive, topPaddingInactive)
+        if (bottomNavigationItem.title?.isEmpty() ?: true) return
         startTextSizeAnimation(titleTextSizeActive, titleTextSizeInactive)
     }
 
     private fun startPaddingAnimation(paddingStart: Int, paddingEnd: Int) {
+        if (paddingEnd == bottom_navigation_bar_item.paddingTop) {
+            return
+        }
         val animator = ValueAnimator.ofInt(paddingStart, paddingEnd)
         animator.addUpdateListener({ value ->
             bottom_navigation_bar_item.setPadding(bottom_navigation_bar_item.paddingLeft, value.animatedValue as Int,
@@ -113,6 +121,9 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
     }
 
     private fun startTextSizeAnimation(titleTextSizeStart: Float, titleTextSizeEnd: Float) {
+        if (titleTextSizeEnd == bottom_navigation_bar_title.textSize) {
+            return
+        }
         val animator = ValueAnimator.ofFloat(titleTextSizeStart.toFloat(), titleTextSizeEnd.toFloat())
         animator.addUpdateListener({ value ->
             bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, value.animatedValue as Float)

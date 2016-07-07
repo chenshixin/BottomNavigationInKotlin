@@ -21,7 +21,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
     /**
      * Inactive title color res id
      */
-    var titleColorInactive: Int?
+    var titleColorActive: Int?
         set(value) {
             bottom_navigation_bar.titleColorActive = value
         }
@@ -30,7 +30,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
     /**
      * Active title color res id
      */
-    var titleColorActive: Int?
+    var titleColorInactive: Int?
         set(value) {
             bottom_navigation_bar.titleColorInactive = value
         }
