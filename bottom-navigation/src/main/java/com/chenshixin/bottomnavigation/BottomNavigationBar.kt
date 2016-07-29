@@ -2,9 +2,9 @@ package com.chenshixin.bottomnavigation
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorCompat
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -102,6 +102,15 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
     fun removeItem(item: BottomNavigationItem): BottomNavigationBar {
         items.remove(item)
         return this
+    }
+
+    /**
+     * Set background for badge
+     */
+    fun setBadgeBackground(drawable: Drawable) {
+        tabs.map { tab ->
+            tab.setBadgeBackground(drawable)
+        }
     }
 
     interface OnTabSelectedListener {

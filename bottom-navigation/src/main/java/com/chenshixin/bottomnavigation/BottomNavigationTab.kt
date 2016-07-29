@@ -2,6 +2,7 @@ package com.chenshixin.bottomnavigation
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -47,6 +48,13 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
         setCurrentIcon(item.iconResIdInactive)
         bottom_navigation_bar_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleTextSizeInactive)
         setCurrentTextColor(titleColorInactive)
+    }
+
+    /**
+     * Set background for badge
+     */
+    fun setBadgeBackground(drawable: Drawable) {
+        bottom_navigation_bar_icon_badge.background = drawable
     }
 
     internal fun setBadgeNumber(number: Int?) {
