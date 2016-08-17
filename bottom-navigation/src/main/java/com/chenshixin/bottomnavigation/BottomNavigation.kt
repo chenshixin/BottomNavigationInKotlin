@@ -48,6 +48,8 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
 
     fun setFragmentPagerAdapter(fragmentPagerAdapter: FragmentPagerAdapter) {
         bottom_navigation_view_pager.adapter = fragmentPagerAdapter
+        //Cache all pages
+        bottom_navigation_view_pager.offscreenPageLimit = fragmentPagerAdapter.count - 1
     }
 
     fun setTabItems(tabs: List<BottomNavigationItem>) {
