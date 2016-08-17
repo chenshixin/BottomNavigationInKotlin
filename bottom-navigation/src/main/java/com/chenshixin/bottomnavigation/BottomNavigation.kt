@@ -2,14 +2,11 @@ package com.chenshixin.bottomnavigation
 
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.bottom_navigation.view.*
-import java.util.*
 
 /**
  * BottomNavigation
@@ -41,39 +38,16 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
         get() = bottom_navigation_bar.selectedPosition
         set(value) {
             bottom_navigation_bar.setCurrentTab(value)
-            bottom_navigation_view_pager.currentItem = value
+            bottom_navigation_view_pager.setCurrentItem(value, false)
         }
-
-    private lateinit var fragments: MutableList<Fragment>
 
     init {
         LayoutInflater.from(context).inflate(R.layout.bottom_navigation, this, true)
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
-    fun setFragments(fragmentManager: FragmentManager, fragmentList: ArrayList<Fragment>) {
-        this.fragments = fragmentList
-        bottom_navigation_view_pager.adapter = object : FragmentPagerAdapter(fragmentManager) {
-            override fun getItem(position: Int): Fragment {
-                return fragments[position]
-            }
-
-            override fun getCount(): Int {
-                return fragments.size
-            }
-
-        }
-    }
-
-    /**
-     * Set fragment at position
-     */
-    fun updateFragment(position: Int, fragment: Fragment) {
-        if (position < 0 || position >= fragments.size) {
-            throw IllegalArgumentException("position not exists")
-        }
-        fragments[position] = fragment
-        bottom_navigation_view_pager.adapter.notifyDataSetChanged()
+    fun setFragmentPagerAdapter(fragmentPagerAdapter: FragmentPagerAdapter) {
+        bottom_navigation_view_pager.adapter = fragmentPagerAdapter
     }
 
     fun setTabItems(tabs: List<BottomNavigationItem>) {
@@ -83,6 +57,9 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
     }
 
     fun initialise() {
+        if (bottom_navigation_view_pager.adapter == null) {
+            throw IllegalStateException("adapter not initialised")
+        }
         bottom_navigation_bar.initialise()
         bottom_navigation_bar.onTabSelectedListener = object : BottomNavigationBar.OnTabSelectedListener {
             override fun onTabWillBeSelected(position: Int): Boolean {
@@ -99,10 +76,6 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
             }
 
             override fun onTabReselected(position: Int) {
-                val fragment = fragments[position]
-                if (fragment is BottomNavigationBar.DoubleTapToScrollTop) {
-                    fragment.scrollToTop()
-                }
                 onTabSelectedListener?.onTabReselected(position)
             }
         }

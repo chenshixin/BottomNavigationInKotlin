@@ -124,10 +124,6 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         fun onTabReselected(position: Int)
     }
 
-    interface DoubleTapToScrollTop {
-        fun scrollToTop()
-    }
-
     internal fun show() {
         isHidden = false
         animateOffset(0)

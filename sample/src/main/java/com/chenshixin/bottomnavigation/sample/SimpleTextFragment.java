@@ -10,15 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.chenshixin.bottomnavigation.BottomNavigationBar;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by chenshixin on 7/5/16.
  */
-public class SimpleTextFragment extends Fragment implements BottomNavigationBar.DoubleTapToScrollTop {
+public class SimpleTextFragment extends Fragment{
 
     public static final String KEY_TEXT = "key_text";
 
@@ -73,7 +71,7 @@ public class SimpleTextFragment extends Fragment implements BottomNavigationBar.
 
         TextView textView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.simpleText);
         }
@@ -88,7 +86,6 @@ public class SimpleTextFragment extends Fragment implements BottomNavigationBar.
         return data;
     }
 
-    @Override
     public void scrollToTop() {
         if (mRecyclerView != null) {
             LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();

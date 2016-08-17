@@ -47,7 +47,24 @@ dependencies {
 
   BottomNavigation bottomNavigation = (BottomNavigation) findViewById(R.id.bottom_navigation_bar_with_content);
   bottomNavigation.setTabItems(tabItems);
-  bottomNavigation.setFragments(getSupportFragmentManager(), fragments);
+  bottomNavigation.setFragmentPagerAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+              @Override
+              public Fragment getItem(int position) {
+                  switch (position) {
+                      case 0:
+                          return SimpleTextFragment.newInstance("Explore");
+                      case 1:
+                          return SimpleTextFragment.newInstance("News");
+                      default:
+                          return SimpleTextFragment.newInstance("Mine");
+                  }
+              }
+
+              @Override
+              public int getCount() {
+                  return 3;
+              }
+          });
   bottomNavigation.setTitleColorActive(Color.BLUE);
   bottomNavigation.setTitleColorInactive(Color.RED);
   bottomNavigation.setOnTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
