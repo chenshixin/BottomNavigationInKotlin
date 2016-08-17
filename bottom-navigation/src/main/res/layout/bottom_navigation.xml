@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/bottom_navigation_bar_content"
+    <com.chenshixin.bottomnavigation.NoScrollViewPager
+        android:id="@+id/bottom_navigation_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </FrameLayout>
+    </com.chenshixin.bottomnavigation.NoScrollViewPager>
 
     <com.chenshixin.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigation_bar"

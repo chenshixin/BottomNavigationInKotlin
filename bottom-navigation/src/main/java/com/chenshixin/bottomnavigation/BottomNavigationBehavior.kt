@@ -7,7 +7,7 @@ import android.view.View
 /**
  * Created by chenshixin on 7/5/16.
  */
-class BottomNavigationBehavior: CoordinatorLayout.Behavior<BottomNavigationBar>() {
+class BottomNavigationBehavior : CoordinatorLayout.Behavior<BottomNavigationBar>() {
 
     companion object {
         val SCROLL_DIRECTION_UP = 1
@@ -18,7 +18,7 @@ class BottomNavigationBehavior: CoordinatorLayout.Behavior<BottomNavigationBar>(
     private var totalDyConsumed = -1
 
     override fun layoutDependsOn(parent: CoordinatorLayout?, child: BottomNavigationBar, dependency: View?): Boolean {
-        return dependency?.id == R.id.bottom_navigation_bar_content
+        return dependency?.id == R.id.bottom_navigation_view_pager
     }
 
     override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout?, child: BottomNavigationBar, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
