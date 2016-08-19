@@ -3,6 +3,8 @@ package com.chenshixin.bottomnavigation
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.os.Parcelable
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.ViewCompat
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
@@ -42,6 +44,25 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
     init {
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         LayoutInflater.from(context).inflate(R.layout.bottom_navigation_bar, this, true)
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val bundle = Bundle()
+        bundle.putParcelable("instanceState", super.onSaveInstanceState())
+        bundle.putInt("mCurrentTab", selectedPosition)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(stateParams: Parcelable) {
+        var state = stateParams
+        if (state is Bundle) {
+            selectedPosition = state.getInt("mCurrentTab")
+            state = state.getParcelable<Parcelable>("instanceState")
+            if (selectedPosition != 0 && bottom_navigation_bar_item_container.childCount > 0) {
+                setCurrentTab(selectedPosition)
+            }
+        }
+        super.onRestoreInstanceState(state)
     }
 
     fun initialise() {
