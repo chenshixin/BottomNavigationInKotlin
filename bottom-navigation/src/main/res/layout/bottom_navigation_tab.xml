@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/tab_bottom_padding"
-    android:paddingLeft="@dimen/tab_vertical_padding"
-    android:paddingRight="@dimen/tab_vertical_padding"
     android:paddingTop="@dimen/tab_top_padding_inactive">
 
     <FrameLayout
