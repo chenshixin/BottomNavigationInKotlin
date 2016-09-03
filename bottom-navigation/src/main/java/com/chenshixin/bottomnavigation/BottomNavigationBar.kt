@@ -69,6 +69,8 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         if (items.isEmpty()) {
             return
         }
+        tabs.clear()
+        bottom_navigation_bar_item_container.removeAllViews()
         //TODO parse xml here
         ViewCompat.setElevation(this, 24F)
         bottom_navigation_bar_item_container.removeAllViews()

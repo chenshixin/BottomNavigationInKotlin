@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.bottom_navigation_tab.view.*
 
 /**
@@ -40,7 +41,8 @@ class BottomNavigationTab(item: BottomNavigationItem, itemWidth: Int, val titleC
 
     init {
         LayoutInflater.from(context).inflate(R.layout.bottom_navigation_tab, this, true)
-        val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val params = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT)
+        params.weight = 1F
         params.width = itemWidth
         layoutParams = params
         setBadgeNumber(item.number)
