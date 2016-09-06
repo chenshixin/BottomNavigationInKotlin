@@ -2,7 +2,7 @@ package com.chenshixin.bottomnavigation
 
 import android.content.Context
 import android.support.design.widget.CoordinatorLayout
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -46,10 +46,8 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
         layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
-    fun setFragmentPagerAdapter(fragmentPagerAdapter: FragmentPagerAdapter) {
+    fun setFragmentPagerAdapter(fragmentPagerAdapter: FragmentStatePagerAdapter) {
         bottom_navigation_view_pager.adapter = fragmentPagerAdapter
-        //Cache all pages
-        bottom_navigation_view_pager.offscreenPageLimit = fragmentPagerAdapter.count - 1
     }
 
     fun setTabItems(tabs: List<BottomNavigationItem>) {
