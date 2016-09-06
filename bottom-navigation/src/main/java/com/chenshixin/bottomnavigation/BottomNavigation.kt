@@ -53,6 +53,7 @@ class BottomNavigation(context: Context?, attrs: AttributeSet?) : CoordinatorLay
     }
 
     fun setTabItems(tabs: List<BottomNavigationItem>) {
+        bottom_navigation_bar.clearItems()
         tabs.map { item ->
             bottom_navigation_bar.addItem(item)
         }

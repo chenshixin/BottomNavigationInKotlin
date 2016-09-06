@@ -23,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
 //        tabItems.add(new BottomNavigationItem("", 0, R.drawable.ic_tab_explore_b, R.drawable.ic_tab_explore_a));
 //        tabItems.add(new BottomNavigationItem("", 2, R.drawable.ic_tab_news_b, R.drawable.ic_tab_news_a));
 //        tabItems.add(new BottomNavigationItem("", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
-        tabItems.add(new BottomNavigationItem("Explore", 0, R.drawable.ic_tab_explore_b, R.drawable.ic_tab_explore_a));
-        tabItems.add(new BottomNavigationItem("News", 2, R.drawable.ic_tab_news_b, R.drawable.ic_tab_news_a));
-        tabItems.add(new BottomNavigationItem("Mine", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
+        tabItems.add(new BottomNavigationItem("工作台", 0, R.drawable.ic_tab_explore_b, R.drawable.ic_tab_explore_a));
+        tabItems.add(new BottomNavigationItem("发现", 2, R.drawable.ic_tab_news_b, R.drawable.ic_tab_news_a));
+        tabItems.add(new BottomNavigationItem("官方项目", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
+        tabItems.add(new BottomNavigationItem("消息", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
+        tabItems.add(new BottomNavigationItem("我", 3, R.drawable.ic_tab_mine_b, R.drawable.ic_tab_mine_a));
 
 
         BottomNavigation bottomNavigation = (BottomNavigation) findViewById(R.id.bottom_navigation_bar_with_content);

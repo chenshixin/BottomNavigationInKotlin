@@ -119,6 +119,10 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         return this
     }
 
+    fun clearItems() {
+        items.clear()
+    }
+
     /**
      * Remove an item form current bar
      */
