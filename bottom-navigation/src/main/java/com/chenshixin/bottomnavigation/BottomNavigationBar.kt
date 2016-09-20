@@ -28,6 +28,7 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
     var backgroundColor: Int? = null
     var onTabSelectedListener: OnTabSelectedListener? = null
     var selectedPosition = 0
+    var badgeBgDrawable: Drawable? = null
 
     /**
      * Inactive title color res id
@@ -80,6 +81,9 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
         val tabWidth = getItemWidth()
         items.mapIndexed { index, item ->
             val tab = BottomNavigationTab(item, tabWidth, titleColorInactive, titleColorActive, context)
+            if (badgeBgDrawable != null) {
+                tab.setBadgeBackground(badgeBgDrawable!!)
+            }
             tab.position = index
             tab.setOnClickListener { view ->
                 val newPosition = (view as BottomNavigationTab).position
@@ -98,6 +102,7 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
             tabs.add(tab)
             bottom_navigation_bar_item_container.addView(tab)
         }
+
     }
 
     internal fun setCurrentTab(index: Int) {
@@ -135,6 +140,7 @@ class BottomNavigationBar(context: Context, attrs: AttributeSet) : FrameLayout(c
      * Set background for badge
      */
     fun setBadgeBackground(drawable: Drawable) {
+        badgeBgDrawable = drawable
         tabs.map { tab ->
             tab.setBadgeBackground(drawable)
         }
